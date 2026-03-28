@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brian Cahill — Mechanical Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1a18;
+      --ink-muted: #6b6b67;
+      --ink-faint: #b0b0aa;
+      --bg: #f8f7f4;
+      --bg-card: #ffffff;
+      --accent: #2d5a8e;
+      --accent-light: #e8f0f9;
+      --rule: #e3e2dd;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --mono: 'DM Mono', 'Courier New', monospace;
+      --max: 780px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(248,247,244,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 18px;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    section {
+      padding: 96px 32px;
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    section:first-of-type { padding-top: 140px; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    hr.rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 0;
+    }
+
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(42px, 7vw, 72px);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+    .hero-name em { font-style: italic; color: var(--accent); }
+    .hero-sub {
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--ink-muted);
+      max-width: 560px;
+      line-height: 1.65;
+      margin-bottom: 36px;
+    }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+    .tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 5px 12px;
+      border-radius: 3px;
+    }
+    .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 12px 26px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all .2s;
+      cursor: pointer;
+    }
+    .btn-primary { background: var(--accent); color: #fff; border: 1.5px solid var(--accent); }
+    .btn-primary:hover { background: #1f4270; border-color: #1f4270; }
+    .btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--rule); }
+    .btn-outline:hover { border-color: var(--ink-muted); }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .about-text p { color: var(--ink-muted); margin-bottom: 16px; font-weight: 300; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-stats { display: flex; flex-direction: column; gap: 16px; padding-top: 4px; }
+    .stat { border-top: 1px solid var(--rule); padding-top: 16px; }
+    .stat-num { font-family: var(--serif); font-size: 36px; color: var(--ink); line-height: 1; margin-bottom: 4px; }
+    .stat-label { font-size: 13px; color: var(--ink-muted); font-weight: 300; }
+
+    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
+    .section-title { font-family: var(--serif); font-size: 38px; letter-spacing: -0.01em; line-height: 1.1; }
+    .project-grid { display: flex; flex-direction: column; gap: 2px; }
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px 24px;
+      align-items: start;
+      transition: box-shadow .2s, transform .15s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .project-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.07); transform: translateY(-1px); }
+    .project-number { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); letter-spacing: 0.1em; margin-bottom: 8px; }
+    .project-title { font-size: 17px; font-weight: 500; margin-bottom: 6px; }
+    .project-desc { font-size: 14px; color: var(--ink-muted); font-weight: 300; line-height: 1.55; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+    .project-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      background: var(--bg);
+      color: var(--ink-muted);
+      padding: 3px 8px;
+      border-radius: 2px;
+      border: 1px solid var(--rule);
+    }
+    .project-arrow { font-size: 20px; color: var(--ink-faint); line-height: 1; transition: color .2s; }
+    .project-card:hover .project-arrow { color: var(--accent); }
+
+    .resume-section { margin-bottom: 48px; }
+    .resume-heading {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 10px;
+      margin-bottom: 24px;
+    }
+    .resume-item { margin-bottom: 28px; }
+    .resume-item:last-child { margin-bottom: 0; }
+    .resume-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 3px; }
+    .resume-role { font-size: 15px; font-weight: 500; }
+    .resume-date { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); letter-spacing: 0.05em; white-space: nowrap; }
+    .resume-company { font-size: 13px; color: var(--ink-muted); margin-bottom: 8px; }
+    .resume-bullets { list-style: none; padding: 0; }
+    .resume-bullets li {
+      font-size: 14px;
+      color: var(--ink-muted);
+      font-weight: 300;
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 4px;
+      line-height: 1.55;
+    }
+    .resume-bullets li::before { content: '–'; position: absolute; left: 0; color: var(--ink-faint); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .skill-item { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-muted); }
+    .skill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .resume-download {
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .resume-download p { font-size: 14px; color: var(--ink-muted); }
+
+    .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .contact-intro p { font-size: 15px; color: var(--ink-muted); font-weight: 300; line-height: 1.65; margin-bottom: 16px; }
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--ink-muted);
+      margin-bottom: 12px;
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .contact-detail:hover { color: var(--accent); }
+    .contact-detail-icon {
+      width: 30px; height: 30px;
+      border-radius: 6px;
+      background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-detail-icon svg { width: 14px; height: 14px; stroke: var(--accent); fill: none; }
+
+    .form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    label { display: block; font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 6px; }
+    input, textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--rule);
+      border-radius: 5px;
+      background: var(--bg-card);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 300;
+      transition: border-color .2s;
+      outline: none;
+      resize: vertical;
+    }
+    input:focus, textarea:focus { border-color: var(--accent); }
+    input::placeholder, textarea::placeholder { color: var(--ink-faint); }
+    textarea { min-height: 110px; }
+    #form-status { font-size: 13px; color: var(--accent); display: none; margin-top: 4px; }
+
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 32px;
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p { font-size: 13px; color: var(--ink-faint); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 13px; color: var(--ink-faint); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--ink-muted); }
+
+    @media (max-width: 640px) {
+      section { padding: 72px 20px; }
+      .nav-inner { padding: 0 20px; }
+      .nav-links { gap: 18px; }
+      .about-grid, .contact-layout { grid-template-columns: 1fr; gap: 36px; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-row { grid-template-columns: 1fr; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .resume-download { flex-direction: column; align-items: flex-start; gap: 16px; }
+      footer { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">Brian Cahill</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="section-label">Solutions Design Engineer &amp; Mechanical Engineer</p>
+  <h1 class="hero-name">Brian<br />Cahill</h1>
+  <p class="hero-sub">
+    Engineer at Amazon Robotics leading large-scale fulfillment center deployments
+    across North America. I combine CAD expertise, Python automation, and systems
+    thinking to ship complex projects on time — and build tools that make the whole
+    team faster.
+  </p>
+  <div class="tag-row">
+    <span class="tag">AutoCAD</span>
+    <span class="tag">Python</span>
+    <span class="tag">AutoLISP</span>
+    <span class="tag">SolidWorks (CSWA)</span>
+    <span class="tag">SQL</span>
+    <span class="tag">FEA</span>
+    <span class="tag">DoD Secret Clearance</span>
+  </div>
+  <div class="cta-row">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="resume.pdf" class="btn btn-outline" target="_blank">View Resume PDF</a>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">Background</p>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm a Solutions Design Engineer at Amazon Robotics, where I lead end-to-end
+        deployment of robotic storage systems across North American fulfillment centers.
+        I graduated from Northeastern University with a B.S. in Mechanical Engineering
+        and a minor in Data Science — Magna Cum Laude, 3.8 GPA.
+      </p>
+      <p>
+        I build tools that make engineering teams faster: Python scripts, AutoLISP
+        programs, AI agents that integrate with AutoCAD, and deployment wikis that
+        cut onboarding time for new engineers. I've received 2 promotions in under
+        2 years at Amazon.
+      </p>
+      <p>
+        Outside of work I'm a big hockey, golf, and football fan. I enjoy mathematical
+        puzzles, staying active, and binging a good TV series.
+      </p>
+    </div>
+    <div class="about-stats">
+      <div class="stat">
+        <div class="stat-num">6</div>
+        <div class="stat-label">Concurrent FC deployments managed</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">50%</div>
+        <div class="stat-label">CAD time reduction via AI LISP agent</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">$192k</div>
+        <div class="stat-label">Remobilization costs saved in one project</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Selected Work</p>
+      <h2 class="section-title">Projects</h2>
+    </div>
+  </div>
+  <div class="project-grid">
+
+    <a href="https://cahillb2.wixsite.com/brian-cahill/acoustophoretic-force-analysis" target="_blank" class="project-card">
+      <div>
+        <p class="project-number">01</p>
+        <p class="project-title">Acoustophoretic Force Analysis</p>
+        <p class="project-desc">
+          Designed a procedure and custom tooling to measure the acoustophoretic force
+          produced by an acoustic bioprinter without disturbing the acoustic field.
+          Combined system analysis with hands-on data collection to drive meaningful
+          design improvements.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">System Analysis</span>
+          <span class="project-tag">Data Analysis</span>
+          <span class="project-tag">AcousticaBio</span>
+        </div>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+    <a href="https://cahillb2.wixsite.com/brian-cahill/acousticabio-designs" target="_blank" class="project-card">
+      <div>
+        <p class="project-number">02</p>
+        <p class="project-title">AcousticaBio Design Work</p>
+        <p class="project-desc">
+          Led design and prototyping of transducer mounts, acrylic electronic panels,
+          and soundproof enclosures. Iterated on the acoustophoretic printhead design
+          across both version 1 and version 2 of the printer.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">SolidWorks</span>
+          <span class="project-tag">Mechanical Design</span>
+          <span class="project-tag">Prototyping</span>
+          <span class="project-tag">3D Printing</span>
+        </div>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+    <a href="https://cahillb2.wixsite.com/brian-cahill/academic-projects" target="_blank" class="project-card">
+      <div>
+        <p class="project-number">03</p>
+        <p class="project-title">Academic Projects</p>
+        <p class="project-desc">
+          Highlights include a 2022 FIFA World Cup outcome predictor built in Python
+          and a Capstone project that earned first place in its track at Northeastern.
+          Work spans both mechanical design and data science disciplines.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">Data Science</span>
+          <span class="project-tag">Capstone · 1st Place</span>
+        </div>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- RESUME -->
+<section id="resume">
+  <p class="section-label">Experience &amp; Skills</p>
+  <h2 class="section-title" style="margin-bottom: 48px;">Resume</h2>
+
+  <div class="resume-section">
+    <p class="resume-heading">Work Experience</p>
+
+    <div class="resume-item">
+      <div class="resume-top">
+        <span class="resume-role">L4 Solutions Design Engineer · Lead Solutions Deployment Engineer</span>
+        <span class="resume-date">Apr 2024 – Present</span>
+      </div>
+      <p class="resume-company">Amazon Robotics, Robotic Storage Technology · North Reading, MA</p>
+      <ul class="resume-bullets">
+        <li>Lead end-to-end deployment for all North American ToteASRS new building and retrofit projects, managing 6 concurrent fulfillment center deployments.</li>
+        <li>Developed Python automation tools eliminating 20+ hours of manual work per designer per deployment, including a Wireless Access Point placement script (8+ hours → &lt;5 minutes).</li>
+        <li>Created an AI LISP agent integrating with AutoCAD that decreased CAD time by 50% in beta — equating to ~500 hours saved per designer annually.</li>
+        <li>Wrote a LISP program analyzing 750k+ sq ft AutoCAD drawings, saving thousands of collective hours annually in drawing analysis and on-site rework.</li>
+        <li>Delivered two critical site survey packages in 2 business days (typical: 2 weeks), saving $192k in remobilization costs.</li>
+        <li>Achieved 100% on-time delivery with 0 critical deployment errors across 50+ production-level map deployments and 4 complete floor survey packages.</li>
+        <li>Received 2 promotions in under 2 years.</li>
+      </ul>
+    </div>
+
+    <div class="resume-item">
+      <div class="resume-top">
+        <span class="resume-role">Automation Engineering Co-op</span>
+        <span class="resume-date">Jan 2023 – Aug 2023</span>
+      </div>
+      <p class="resume-company">AcousticaBio · Cambridge, MA</p>
+      <ul class="resume-bullets">
+        <li>Designed components of an acoustophoretic printer capable of emitting a 250g force.</li>
+        <li>Created a Python/ImageJ script to analyze videos and images of microparticles and produce performance statistics and distribution plots.</li>
+        <li>Prepared and executed microparticle concentration and size experiments on the acoustophoretic printer.</li>
+      </ul>
+    </div>
+
+    <div class="resume-item">
+      <div class="resume-top">
+        <span class="resume-role">Operations Engineering Co-op</span>
+        <span class="resume-date">Jul 2021 – Jan 2022</span>
+      </div>
+      <p class="resume-company">Raytheon Missiles &amp; Defense · Andover, MA</p>
+      <ul class="resume-bullets">
+        <li>Created an AutoCAD floor plan documentation standard for the Andover Industrial Engineering team.</li>
+        <li>Led the AutoCAD effort to reorganize over 100,000 sq ft of factory space, coordinating between multiple team leaders.</li>
+        <li>Built a VBA QR scanner log for floor operators to track Work-in-Progress and minimize lost material.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="resume-section">
+    <p class="resume-heading">Education</p>
+    <div class="resume-item">
+      <div class="resume-top">
+        <span class="resume-role">B.S. Mechanical Engineering · Minor in Data Science</span>
+        <span class="resume-date">Dec 2023</span>
+      </div>
+      <p class="resume-company">Northeastern University · Boston, MA</p>
+      <ul class="resume-bullets">
+        <li>GPA: 3.8 · Magna Cum Laude · Dean's List (all semesters)</li>
+        <li>1st place, Mechanical Engineering Capstone track — Metal Powder Aerosolizer using ERM motors and pressure differential for cold spray 3D printing.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="resume-section">
+    <p class="resume-heading">Skills &amp; Certifications</p>
+    <div class="skills-grid">
+      <div class="skill-item"><span class="skill-dot"></span>Python</div>
+      <div class="skill-item"><span class="skill-dot"></span>AutoLISP</div>
+      <div class="skill-item"><span class="skill-dot"></span>AutoCAD</div>
+      <div class="skill-item"><span class="skill-dot"></span>SolidWorks (CSWA)</div>
+      <div class="skill-item"><span class="skill-dot"></span>SQL (MySQL)</div>
+      <div class="skill-item"><span class="skill-dot"></span>VBA</div>
+      <div class="skill-item"><span class="skill-dot"></span>MATLAB</div>
+      <div class="skill-item"><span class="skill-dot"></span>FEA</div>
+      <div class="skill-item"><span class="skill-dot"></span>Excel (Adv. Macros)</div>
+      <div class="skill-item"><span class="skill-dot"></span>3D Printing (FDM/SLA)</div>
+      <div class="skill-item"><span class="skill-dot"></span>Laser Cutting</div>
+      <div class="skill-item"><span class="skill-dot"></span>DoD Secret Clearance</div>
+    </div>
+  </div>
+
+  <div class="resume-download">
+    <p>Want the full PDF version?</p>
+    <a href="resume.pdf" class="btn btn-outline" download>Download Resume PDF</a>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Get in Touch</p>
+  <div class="contact-layout">
+    <div class="contact-intro">
+      <h2 class="section-title" style="margin-bottom: 20px;">Let's talk.</h2>
+      <p>
+        I'm actively looking for full-time engineering roles where I can apply my
+        background in mechanical design, automation, and data analysis.
+      </p>
+      <p>
+        Whether you have a role in mind, a project to discuss, or just want to
+        connect — feel free to reach out.
+      </p>
+
+      <div style="margin-top: 32px;">
+        <a href="/cdn-cgi/l/email-protection#9dfefcf5f4f1f1b3ffddf3f2efe9f5f8fceee9f8eff3b3f8f9e8" class="contact-detail">
+          <span class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+          </span>
+          <span class="__cf_email__" data-cfemail="4526242d2c29296b27052b2a37312d2024363120372b6b202130">[email&#160;protected]</span>
+        </a>
+        <a href="tel:7816706453" class="contact-detail">
+          <span class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+          </span>
+          (781) 670-6453
+        </a>
+        <a href="https://www.instagram.com/briancahill10/" class="contact-detail" target="_blank">
+          <span class="contact-detail-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="var(--accent)" stroke="none"/></svg>
+          </span>
+          @briancahill10
+        </a>
+      </div>
+    </div>
+
+    <form class="form" id="contact-form" onsubmit="submitForm(event)">
+      <div class="form-row">
+        <div>
+          <label for="fname">Name</label>
+          <input type="text" id="fname" name="name" placeholder="Your name" required />
+        </div>
+        <div>
+          <label for="femail">Email</label>
+          <input type="email" id="femail" name="email" placeholder="your@email.com" required />
+        </div>
+      </div>
+      <div>
+        <label for="fsubject">Subject</label>
+        <input type="text" id="fsubject" name="subject" placeholder="Job opportunity, project inquiry, etc." />
+      </div>
+      <div>
+        <label for="fmessage">Message</label>
+        <textarea id="fmessage" name="message" placeholder="Tell me what you're working on or what you're looking for…" required></textarea>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-primary" style="width:100%">Send Message</button>
+        <p id="form-status">✓ Message sent — I'll be in touch soon.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>© <span id="year"></span> Brian Cahill · Boston, MA</p>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#projects">Work</a>
+    <a href="#resume">Resume</a>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  function submitForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('form-status').style.display = 'block';
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+      e.target.reset();
+    }, 800);
+  }
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.style.color = ''
