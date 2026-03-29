@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acoustophoretic Force Analysis — Brian Cahill</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #1a1a18; --ink-muted: #6b6b67; --ink-faint: #b0b0aa;
+      --bg: #f8f7f4; --bg-card: #ffffff; --accent: #2d5a8e;
+      --accent-light: #e8f0f9; --rule: #e3e2dd;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --mono: 'DM Mono', 'Courier New', monospace;
+      --max: 780px;
+    }
+    body { font-family: var(--sans); background: var(--bg); color: var(--ink); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(248,247,244,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); }
+    .nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 32px; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: var(--serif); font-size: 18px; color: var(--ink); text-decoration: none; }
+    .nav-back { font-size: 13px; font-weight: 500; letter-spacing: 0.06em; color: var(--ink-muted); text-decoration: none; transition: color .2s; }
+    .nav-back:hover { color: var(--ink); }
+    .page { max-width: var(--max); margin: 0 auto; padding: 100px 32px 80px; }
+    .project-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .project-title { font-family: var(--serif); font-size: clamp(32px, 5vw, 52px); line-height: 1.1; margin-bottom: 16px; }
+    .project-subtitle { font-size: 16px; font-weight: 300; color: var(--ink-muted); margin-bottom: 32px; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--rule); }
+    .tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; background: var(--accent-light); color: var(--accent); padding: 5px 12px; border-radius: 3px; }
+    .section { margin-bottom: 40px; }
+    .section-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); border-bottom: 1px solid var(--rule); padding-bottom: 10px; margin-bottom: 20px; }
+    .section p { font-size: 15px; font-weight: 300; color: var(--ink-muted); line-height: 1.7; margin-bottom: 12px; }
+    .section p:last-child { margin-bottom: 0; }
+    .steps { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+    .step { display: flex; gap: 12px; }
+    .step-bullet { color: var(--ink-faint); font-size: 15px; line-height: 1.7; flex-shrink: 0; }
+    .step p { font-size: 15px; font-weight: 300; color: var(--ink-muted); line-height: 1.7; }
+    .outcome-box { background: var(--bg-card); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: 6px; padding: 20px 24px; }
+    .outcome-box p { font-size: 15px; font-weight: 300; color: var(--ink-muted); line-height: 1.7; }
+    .image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 40px; }
+    .image-item img { width: 100%; height: 240px; object-fit: cover; border-radius: 6px; border: 1px solid var(--rule); display: block; }
+    .image-caption { font-size: 12px; color: var(--ink-faint); margin-top: 8px; line-height: 1.5; font-style: italic; }
+    footer { border-top: 1px solid var(--rule); padding: 32px; max-width: var(--max); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    footer p { font-size: 13px; color: var(--ink-faint); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 13px; color: var(--ink-faint); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--ink-muted); }
+    @media (max-width: 640px) { .page { padding: 90px 20px 60px; } .nav-inner { padding: 0 20px; } footer { flex-direction: column; gap: 12px; text-align: center; } .image-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Brian Cahill</a>
+    <a href="index.html#projects" class="nav-back">← Back to Projects</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <p class="project-label">AcousticaBio · Jan 2023 – Aug 2023</p>
+  <h1 class="project-title">Acoustophoretic Force Analysis</h1>
+  <p class="project-subtitle">System Analysis &amp; Data Analysis</p>
+
+  <div class="tag-row">
+    <span class="tag">Python</span>
+    <span class="tag">ImageJ (IJM)</span>
+    <span class="tag">Data Analysis</span>
+    <span class="tag">System Analysis</span>
+    <span class="tag">AcousticaBio</span>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Problem</p>
+    <p>My team needed to measure the acoustophoretic force our printer was producing at the droplet's point of detachment from the nozzle. Directly measuring this would require placing a microphone inside a 1.5mm cylindrical chamber — which wasn't feasible for three reasons:</p>
+    <ul class="steps" style="margin-top: 16px;">
+      <li class="step"><span class="step-bullet">–</span><p>A microphone inside the chamber would affect the acoustic field, producing incorrect readings.</p></li>
+      <li class="step"><span class="step-bullet">–</span><p>Placing a microphone directly below the nozzle would prevent any droplet from forming at all.</p></li>
+      <li class="step"><span class="step-bullet">–</span><p>The 1.5mm diameter constraint made fitting a microphone in the cylinder physically impractical.</p></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Action</p>
+    <ul class="steps">
+      <li class="step"><span class="step-bullet">–</span><p>Since a microphone wouldn't work, I needed a non-contact approach. I curated camera presets to capture video of droplets right below the nozzle — at that position they are fully formed — and used the footage to calibrate pixels to microns.</p></li>
+      <li class="step"><span class="step-bullet">–</span><p>I used ImageJ (IJM) to write a macro that analyzed the videos and output a CSV file of the droplet areas on screen. Because droplet volume is dependent on the acoustophoretic force, I was able to calculate the force the printer was producing from those measurements.</p></li>
+      <li class="step"><span class="step-bullet">–</span><p>I wrote a Python script that converted the droplet measurements in the CSV files from pixels to microns and produced statistics on average force and force covariance across all droplets.</p></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Outcome</p>
+    <div class="outcome-box">
+      <p>I produced a reliable, non-invasive method to measure the acoustophoretic force our printer was generating — without affecting the acoustic field. The Python script and IJM macro together made it efficient to produce charts and statistics on printer performance on demand.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Photos</p>
+    <div class="image-grid">
+      <div class="image-item">
+        <img src="images/acoustophoretic_force_analysis_image1.jpg" alt="Acoustophoretic force measurement location" />
+        <p class="image-caption">An image of where we wanted to measure the acoustophoretic force.</p>
+      </div>
+      <div class="image-item">
+        <img src="images/acoustophoretic_force_analysis_image2.jpg" alt="Desktop showing blown up droplet on nozzle tip" />
+        <p class="image-caption">Desktop showing a blown up version of a droplet on the nozzle tip.</p>
+      </div>
+      <div class="image-item">
+        <img src="images/acoustophoretic_force_analysis_image3.jpg" alt="Snippet of the IJM macro" />
+        <p class="image-caption">Snippet of the IJM macro used to analyze videos of droplets from the printer.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© <span id="year"></span> Brian Cahill</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#projects">Projects</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

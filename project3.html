@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academic Projects — Brian Cahill</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #1a1a18; --ink-muted: #6b6b67; --ink-faint: #b0b0aa;
+      --bg: #f8f7f4; --bg-card: #ffffff; --accent: #2d5a8e;
+      --accent-light: #e8f0f9; --rule: #e3e2dd;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --mono: 'DM Mono', 'Courier New', monospace;
+      --max: 780px;
+    }
+    body { font-family: var(--sans); background: var(--bg); color: var(--ink); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(248,247,244,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); }
+    .nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 32px; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: var(--serif); font-size: 18px; color: var(--ink); text-decoration: none; }
+    .nav-back { font-size: 13px; font-weight: 500; letter-spacing: 0.06em; color: var(--ink-muted); text-decoration: none; transition: color .2s; }
+    .nav-back:hover { color: var(--ink); }
+    .page { max-width: var(--max); margin: 0 auto; padding: 100px 32px 80px; }
+    .project-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .project-title { font-family: var(--serif); font-size: clamp(32px, 5vw, 52px); line-height: 1.1; margin-bottom: 16px; }
+    .project-subtitle { font-size: 16px; font-weight: 300; color: var(--ink-muted); margin-bottom: 32px; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--rule); }
+    .tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; background: var(--accent-light); color: var(--accent); padding: 5px 12px; border-radius: 3px; }
+    .subproject { margin-bottom: 56px; padding-bottom: 56px; border-bottom: 1px solid var(--rule); }
+    .subproject:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .subproject-title { font-family: var(--serif); font-size: 26px; margin-bottom: 6px; }
+    .subproject-type { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; margin-bottom: 24px; }
+    .section { margin-bottom: 28px; }
+    .section-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); border-bottom: 1px solid var(--rule); padding-bottom: 10px; margin-bottom: 16px; }
+    .section p { font-size: 15px; font-weight: 300; color: var(--ink-muted); line-height: 1.7; margin-bottom: 10px; }
+    .section p:last-child { margin-bottom: 0; }
+    .steps { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+    .step { display: flex; gap: 12px; }
+    .step-bullet { color: var(--ink-faint); font-size: 15px; line-height: 1.7; flex-shrink: 0; }
+    .step p { font-size: 15px; font-weight: 300; color: var(--ink-muted); line-height: 1.7; }
+    .outcome-box { background: var(--bg-card); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: 6px; padding: 20px 24px; }
+    .outcome-box p { font-size: 15px; font-weight: 300; color: var(--ink-muted); line-height: 1.7; margin-bottom: 8px; }
+    .outcome-box p:last-child { margin-bottom: 0; }
+    .award { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; background: var(--accent-light); color: var(--accent); padding: 6px 12px; border-radius: 3px; margin-top: 12px; }
+    .image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 24px; }
+    .image-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+    .image-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+    .image-item img { width: 100%; height: 220px; object-fit: cover; border-radius: 6px; border: 1px solid var(--rule); display: block; }
+    .image-item img.short { height: 160px; }
+    .image-caption { font-size: 12px; color: var(--ink-faint); margin-top: 8px; line-height: 1.5; font-style: italic; }
+    footer { border-top: 1px solid var(--rule); padding: 32px; max-width: var(--max); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    footer p { font-size: 13px; color: var(--ink-faint); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 13px; color: var(--ink-faint); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--ink-muted); }
+    @media (max-width: 640px) { .page { padding: 90px 20px 60px; } .nav-inner { padding: 0 20px; } footer { flex-direction: column; gap: 12px; text-align: center; } .image-grid, .image-grid-2, .image-grid-3 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Brian Cahill</a>
+    <a href="index.html#projects" class="nav-back">← Back to Projects</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <p class="project-label">Northeastern University · 2019 – 2023</p>
+  <h1 class="project-title">Academic Projects</h1>
+  <p class="project-subtitle">Design, Data Analysis &amp; Machine Learning</p>
+
+  <div class="tag-row">
+    <span class="tag">Python</span>
+    <span class="tag">Machine Learning</span>
+    <span class="tag">Data Analysis</span>
+    <span class="tag">Mechanical Design</span>
+    <span class="tag">Capstone · 1st Place</span>
+  </div>
+
+  <!-- Capstone -->
+  <div class="subproject">
+    <h2 class="subproject-title">Senior Capstone — Metal Powder Aerosolizer</h2>
+    <p class="subproject-type">Research, Mechanical Design &amp; Testing</p>
+
+    <div class="section">
+      <p class="section-label">Problem</p>
+      <p>Our client, Professor Ozan Özdemir of Northeastern's Cold Spray Lab, needed a metal powder aerosolizer that could consistently aerosolize fine particles (0.5–10 microns) with controlled volume flow rates and particle concentrations.</p>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Action</p>
+      <ul class="steps">
+        <li class="step"><span class="step-bullet">–</span><p>Researched how fine metal powders are typically aerosolized in industry and academia, then brainstormed approaches. We narrowed it down to two: a rotary brush method (previously done at larger scale) and a novel vacuum method our group developed.</p></li>
+        <li class="step"><span class="step-bullet">–</span><p>Built a prototype for each approach and placed both on a load cell to determine which provided a more consistent feed rate. The rotary brush data was indecipherable; the vacuum method showed a clear exponential trend — making it the clear choice to pursue.</p></li>
+        <li class="step"><span class="step-bullet">–</span><p>Developed a final prototype designed to fit inside the existing pressure vessel. We applied vibration to linearize the exponential trend in feed rate, successfully achieving the controlled, consistent aerosolization our client needed.</p></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Outcome</p>
+      <div class="outcome-box">
+        <p>The final prototype achieved consistent, controlled aerosolization of fine metal particles — fulfilling the client's requirements. Load cell data confirmed the vibration method successfully linearized the feed rate.</p>
+        <div class="award">🏆 1st Place — Excellence in Design, Engineering Analysis &amp; Communication</div>
+      </div>
+    </div>
+
+    <div class="image-grid-2" style="margin-top: 24px;">
+      <div class="image-item">
+        <img src="images/AcademicProjects_image1.jpg" alt="Rotary brush prototype" />
+        <p class="image-caption">Image of our Rotary Brush Prototype.</p>
+      </div>
+      <div class="image-item">
+        <img src="images/AcademicProjects_image2.jpg" alt="Vacuum method prototype" />
+        <p class="image-caption">Image of our Vacuum Method Prototype.</p>
+      </div>
+    </div>
+
+    <div class="image-grid-2" style="margin-top: 16px;">
+      <div class="image-item">
+        <img src="images/AcademicProjects_image3.jpg" alt="Load cell data rotary brush" class="short" />
+        <p class="image-caption">Load Cell Data for the Rotary Brush Approach.</p>
+      </div>
+      <div class="image-item">
+        <img src="images/AcademicProjects_image4.jpg" alt="Load cell data vacuum method" class="short" />
+        <p class="image-caption">Load Cell Data for the Vacuum Method.</p>
+      </div>
+    </div>
+
+    <div class="image-grid-2" style="margin-top: 16px;">
+      <div class="image-item">
+        <img src="images/AcademicProjects_image5.jpg" alt="Final prototype" />
+        <p class="image-caption">Image of our final prototype.</p>
+      </div>
+      <div class="image-item">
+        <img src="images/AcademicProjects_image6.jpg" alt="Load cell data vacuum with vibration" class="short" style="height:220px" />
+        <p class="image-caption">Load Cell Data for the Vacuum Method using vibration.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- World Cup Predictor -->
+  <div class="subproject">
+    <h2 class="subproject-title">2022 World Cup Predictor</h2>
+    <p class="subproject-type">Python &amp; Machine Learning</p>
+
+    <div class="section">
+      <p class="section-label">Problem</p>
+      <p>For an Intro to Machine Learning course, my group was tasked with selecting a project of our choice, finding and cleaning the data, then applying machine learning techniques from class. We chose to predict the outcome of the 2022 FIFA World Cup using historical World Cup data and socioeconomic indicators.</p>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Action</p>
+      <ul class="steps">
+        <li class="step"><span class="step-bullet">–</span><p>Scraped match data from a historical World Cup database and socioeconomic data from Macrotrends. Cleaned both datasets, removed irrelevant data (countries not in the 2022 tournament), and merged into a single dataframe.</p></li>
+        <li class="step"><span class="step-bullet">–</span><p>Tried a decision tree classifier and K-nearest neighbors. Accuracy was poor — largely due to the models' inability to correctly predict draws. We removed draws from the dataset, since winners could still be determined without them.</p></li>
+        <li class="step"><span class="step-bullet">–</span><p>After dropping draws, KNN accuracy improved but remained suboptimal — likely because all 42 features were weighted equally. Used a random forest classifier to identify the 10 most important features, then re-ran KNN using only those.</p></li>
+        <li class="step"><span class="step-bullet">–</span><p>Cross-validated the KNN model and found 16 to be the optimal number of neighbors. Built a confusion matrix confirming an accuracy score of approximately 0.75.</p></li>
+        <li class="step"><span class="step-bullet">–</span><p>Applied the final model to all 2022 group stage matchups, predicting win or loss for the home team, and continued bracket-style until we had a predicted winner.</p></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <p class="section-label">Outcome</p>
+      <div class="outcome-box">
+        <p>The model produced a full predicted bracket for the 2022 World Cup with a KNN accuracy score of ~0.75. We didn't get the winner right — but Netherlands came close! The project demonstrated the full ML pipeline from data scraping and cleaning through model selection, tuning, and evaluation.</p>
+      </div>
+    </div>
+
+    <div class="image-grid-2" style="margin-top: 24px;">
+      <div class="image-item">
+        <img src="images/AcademicProjects_image7.jpg" alt="Feature importance random forest" />
+        <p class="image-caption">Our Feature Importance based on the Random Forest calculations.</p>
+      </div>
+      <div class="image-item">
+        <img src="images/AcademicProjects_image8.jpg" alt="Confusion matrix KNN classifier" />
+        <p class="image-caption">Confusion Matrix depicting how often the KNN classifier accurately predicts wins and losses.</p>
+      </div>
+    </div>
+
+    <div class="image-grid" style="margin-top: 16px;">
+      <div class="image-item">
+        <img src="images/AcademicProjects_image9.jpg" alt="Predicted 2022 World Cup bracket" />
+        <p class="image-caption">Predicted Bracket of the 2022 World Cup. We got it wrong but Netherlands got close!</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© <span id="year"></span> Brian Cahill</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#projects">Projects</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
