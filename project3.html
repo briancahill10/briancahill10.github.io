@@ -45,18 +45,27 @@
     .outcome-box p { font-size: 15px; font-weight: 300; color: var(--ink-muted); line-height: 1.7; margin-bottom: 8px; }
     .outcome-box p:last-child { margin-bottom: 0; }
     .award { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; background: var(--accent-light); color: var(--accent); padding: 6px 12px; border-radius: 3px; margin-top: 12px; }
-    .image-row { display: grid; gap: 16px; margin-top: 24px; }
-    .image-row.two { grid-template-columns: 1fr 1fr; }
-    .image-row.one { grid-template-columns: 1fr; max-width: 520px; }
-    .image-row.three { grid-template-columns: repeat(3, 1fr); }
-    .image-item img { width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--rule); display: block; }
-    .image-caption { font-size: 12px; color: var(--ink-faint); margin-top: 8px; line-height: 1.5; font-style: italic; }
+
+    .img-block { margin-top: 28px; }
+    /* Two portrait images of similar size side by side — fixed height keeps them even */
+    .img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .img-pair img { width: 100%; height: 300px; object-fit: cover; object-position: center; border-radius: 6px; border: 1px solid var(--rule); display: block; }
+    /* Two landscape charts side by side — shorter fixed height since they're wide */
+    .img-pair-chart { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .img-pair-chart img { width: 100%; height: 220px; object-fit: contain; object-position: center; background: #fff; border-radius: 6px; border: 1px solid var(--rule); display: block; padding: 8px; }
+    /* Single centered — portrait images get max-width cap */
+    .img-single-portrait { display: flex; justify-content: center; }
+    .img-single-portrait img { width: 100%; max-width: 420px; height: auto; border-radius: 6px; border: 1px solid var(--rule); display: block; }
+    /* Single full-width landscape */
+    .img-full img { width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--rule); display: block; }
+    .img-caption { font-size: 12px; color: var(--ink-faint); margin-top: 8px; line-height: 1.5; font-style: italic; text-align: center; }
+
     footer { border-top: 1px solid var(--rule); padding: 32px; max-width: var(--max); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
     footer p { font-size: 13px; color: var(--ink-faint); }
     .footer-links { display: flex; gap: 20px; }
     .footer-links a { font-size: 13px; color: var(--ink-faint); text-decoration: none; transition: color .2s; }
     .footer-links a:hover { color: var(--ink-muted); }
-    @media (max-width: 640px) { .page { padding: 90px 20px 60px; } .nav-inner { padding: 0 20px; } .image-row.two, .image-row.three { grid-template-columns: 1fr; } footer { flex-direction: column; gap: 12px; text-align: center; } }
+    @media (max-width: 640px) { .page { padding: 90px 20px 60px; } .nav-inner { padding: 0 20px; } .img-pair, .img-pair-chart { grid-template-columns: 1fr; } .img-pair img, .img-pair-chart img { height: auto; } footer { flex-direction: column; gap: 12px; text-align: center; } }
   </style>
 </head>
 <body>
@@ -92,64 +101,70 @@
     <div class="section">
       <p class="section-label">Action</p>
       <ul class="steps">
-        <li class="step"><span class="step-bullet">–</span><p>Researched how fine metal powders are typically aerosolized in industry and academia, then brainstormed approaches. We narrowed it down to two: a rotary brush method and a novel vacuum method our group developed.</p></li>
-        <li class="step"><span class="step-bullet">–</span><p>Built a prototype for each approach and placed both on a load cell to determine which provided a more consistent feed rate.</p></li>
+        <li class="step"><span class="step-bullet">–</span><p>Researched how fine metal powders are aerosolized in industry and academia, then narrowed our approach to two options: a rotary brush method and a novel vacuum method our group developed.</p></li>
+        <li class="step"><span class="step-bullet">–</span><p>Built a prototype for each and placed both on a load cell to measure feed rate consistency.</p></li>
       </ul>
     </div>
 
-    <!-- Prototype photos appear after describing the prototypes -->
-    <div class="image-row two">
-      <div class="image-item">
-        <img src="images/AcademicProjects_image1.jpg" alt="Rotary brush prototype" />
-        <p class="image-caption">Image of our Rotary Brush Prototype.</p>
-      </div>
-      <div class="image-item">
-        <img src="images/AcademicProjects_image2.jpg" alt="Vacuum method prototype" />
-        <p class="image-caption">Image of our Vacuum Method Prototype.</p>
-      </div>
-    </div>
-
-    <!-- Load cell data plots appear right after mentioning them -->
-    <div class="section" style="margin-top: 32px;">
-      <ul class="steps">
-        <li class="step"><span class="step-bullet">–</span><p>We placed both prototypes on a load cell and collected data to determine if either provided a constant feed rate. The rotary brush data was indecipherable; the vacuum method showed a clear exponential trend — making it the clear choice to pursue.</p></li>
-      </ul>
-    </div>
-
-    <div class="image-row two">
-      <div class="image-item">
-        <img src="images/AcademicProjects_image3.jpg" alt="Load cell data rotary brush" />
-        <p class="image-caption">Load Cell Data for the Rotary Brush Approach.</p>
-      </div>
-      <div class="image-item">
-        <img src="images/AcademicProjects_image4.jpg" alt="Load cell data vacuum method" />
-        <p class="image-caption">Load Cell Data for the Vacuum Method.</p>
+    <!-- img1 (416x556) and img2 (536x556) — both portrait, similar size, pair works well -->
+    <div class="img-block">
+      <div class="img-pair">
+        <div>
+          <img src="images/AcademicProjects_image1.jpg" alt="Rotary brush prototype" />
+          <p class="img-caption">Image of our Rotary Brush Prototype.</p>
+        </div>
+        <div>
+          <img src="images/AcademicProjects_image2.jpg" alt="Vacuum method prototype" />
+          <p class="img-caption">Image of our Vacuum Method Prototype.</p>
+        </div>
       </div>
     </div>
 
     <div class="section" style="margin-top: 32px;">
       <ul class="steps">
-        <li class="step"><span class="step-bullet">–</span><p>Developed a final prototype designed to fit inside the existing pressure vessel. We applied vibration to linearize the exponential trend in feed rate, successfully achieving the controlled, consistent aerosolization our client needed.</p></li>
+        <li class="step"><span class="step-bullet">–</span><p>The rotary brush data was indecipherable. The vacuum method showed a clear exponential trend — making it the clear choice to pursue.</p></li>
+      </ul>
+    </div>
+
+    <!-- img3 (594x426) and img4 (594x406) — both landscape charts, similar dimensions, use contain so axis labels show -->
+    <div class="img-block">
+      <div class="img-pair-chart">
+        <div>
+          <img src="images/AcademicProjects_image3.jpg" alt="Load cell data rotary brush" />
+          <p class="img-caption">Load Cell Data for the Rotary Brush Approach.</p>
+        </div>
+        <div>
+          <img src="images/AcademicProjects_image4.jpg" alt="Load cell data vacuum method" />
+          <p class="img-caption">Load Cell Data for the Vacuum Method.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" style="margin-top: 32px;">
+      <ul class="steps">
+        <li class="step"><span class="step-bullet">–</span><p>Developed a final prototype to fit inside the existing pressure vessel, applying vibration to linearize the exponential feed rate trend.</p></li>
       </ul>
     </div>
 
     <div class="section">
       <p class="section-label">Outcome</p>
       <div class="outcome-box">
-        <p>The final prototype achieved consistent, controlled aerosolization of fine metal particles — fulfilling the client's requirements. Load cell data confirmed the vibration method successfully linearized the feed rate.</p>
+        <p>The final prototype achieved consistent, controlled aerosolization — fulfilling the client's requirements. Load cell data confirmed vibration successfully linearized the feed rate.</p>
         <div class="award">🏆 1st Place — Excellence in Design, Engineering Analysis &amp; Communication</div>
       </div>
     </div>
 
-    <!-- Final prototype and vibration load cell data -->
-    <div class="image-row two">
-      <div class="image-item">
-        <img src="images/AcademicProjects_image5.jpg" alt="Final prototype" />
-        <p class="image-caption">Image of our final prototype.</p>
-      </div>
-      <div class="image-item">
-        <img src="images/AcademicProjects_image6.jpg" alt="Load cell data vacuum with vibration" />
-        <p class="image-caption">Load Cell Data for the Vacuum Method using vibration.</p>
+    <!-- img5 (404x536 portrait) and img6 (638x458 landscape) — mismatched, use fixed cover height -->
+    <div class="img-block">
+      <div class="img-pair">
+        <div>
+          <img src="images/AcademicProjects_image5.jpg" alt="Final prototype" />
+          <p class="img-caption">Image of our final prototype.</p>
+        </div>
+        <div>
+          <img src="images/AcademicProjects_image6.jpg" alt="Load cell data vacuum with vibration" />
+          <p class="img-caption">Load Cell Data for the Vacuum Method using vibration.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -161,53 +176,54 @@
 
     <div class="section">
       <p class="section-label">Problem</p>
-      <p>For an Intro to Machine Learning course, my group was tasked with selecting a project of our choice, finding and cleaning the data, then applying machine learning techniques from class. We chose to predict the outcome of the 2022 FIFA World Cup using historical World Cup data and socioeconomic indicators.</p>
+      <p>For an Intro to Machine Learning course, my group chose to predict the 2022 FIFA World Cup using historical match data and socioeconomic indicators.</p>
     </div>
 
     <div class="section">
       <p class="section-label">Action</p>
       <ul class="steps">
-        <li class="step"><span class="step-bullet">–</span><p>Scraped match data from a historical World Cup database and socioeconomic data from Macrotrends. Cleaned both datasets and merged into a single dataframe.</p></li>
-        <li class="step"><span class="step-bullet">–</span><p>Tried a decision tree and K-nearest neighbors classifier. Accuracy was poor due to difficulty predicting draws, so we removed draws from the dataset.</p></li>
-        <li class="step"><span class="step-bullet">–</span><p>Used a random forest classifier to identify the 10 most important features out of 42, then re-ran KNN using only those.</p></li>
+        <li class="step"><span class="step-bullet">–</span><p>Scraped and cleaned historical World Cup match data and socioeconomic data from Macrotrends, merging into a single dataframe.</p></li>
+        <li class="step"><span class="step-bullet">–</span><p>Tried decision tree and K-nearest neighbors classifiers. Dropped draws to improve accuracy, then used a random forest to identify the 10 most important features out of 42.</p></li>
       </ul>
     </div>
 
-    <!-- Feature importance chart appears after describing the random forest step -->
-    <div class="image-row one">
-      <div class="image-item">
-        <img src="images/AcademicProjects_image7.jpg" alt="Feature importance from random forest" />
-        <p class="image-caption">Our Feature Importance based on the Random Forest calculations.</p>
+    <!-- img7 (868x486) — wide landscape, full width, use contain so all labels are visible -->
+    <div class="img-block">
+      <div class="img-full">
+        <img src="images/AcademicProjects_image7.jpg" alt="Feature importance random forest" style="object-fit: contain; background: #fff; padding: 8px;" />
+        <p class="img-caption">Our Feature Importance based on the Random Forest calculations.</p>
       </div>
     </div>
 
     <div class="section" style="margin-top: 32px;">
       <ul class="steps">
-        <li class="step"><span class="step-bullet">–</span><p>Cross-validated the KNN model and found 16 to be the optimal number of neighbors. Built a confusion matrix confirming an accuracy score of approximately 0.75.</p></li>
-        <li class="step"><span class="step-bullet">–</span><p>Applied the final model to all 2022 group stage matchups and continued bracket-style until we had a predicted winner.</p></li>
+        <li class="step"><span class="step-bullet">–</span><p>Cross-validated KNN and found 16 to be the optimal number of neighbors, achieving an accuracy score of ~0.75.</p></li>
+        <li class="step"><span class="step-bullet">–</span><p>Applied the model to all 2022 group stage matchups bracket-style to predict a winner.</p></li>
       </ul>
     </div>
 
-    <!-- Confusion matrix appears after describing it -->
-    <div class="image-row one">
-      <div class="image-item">
-        <img src="images/AcademicProjects_image8.jpg" alt="Confusion matrix KNN classifier" />
-        <p class="image-caption">Confusion Matrix depicting how often the KNN classifier accurately predicts wins and losses.</p>
+    <!-- img8 (670x608) — nearly square, centered with max-width -->
+    <div class="img-block">
+      <div class="img-single-portrait">
+        <div style="width:100%;max-width:480px;">
+          <img src="images/AcademicProjects_image8.jpg" alt="Confusion matrix KNN" />
+          <p class="img-caption">Confusion Matrix depicting how often the KNN classifier accurately predicts wins and losses.</p>
+        </div>
       </div>
     </div>
 
     <div class="section" style="margin-top: 32px;">
       <p class="section-label">Outcome</p>
       <div class="outcome-box">
-        <p>The model produced a full predicted bracket for the 2022 World Cup with a KNN accuracy score of ~0.75. We didn't get the winner right — but Netherlands came close!</p>
+        <p>The model produced a full predicted bracket with a KNN accuracy score of ~0.75. We didn't get the winner right — but Netherlands came close!</p>
       </div>
     </div>
 
-    <!-- Final bracket at the end -->
-    <div class="image-row one" style="max-width: 100%;">
-      <div class="image-item">
-        <img src="images/AcademicProjects_image9.jpg" alt="Predicted 2022 World Cup bracket" style="" />
-        <p class="image-caption">Predicted Bracket of the 2022 World Cup. We got it wrong but Netherlands got close!</p>
+    <!-- img9 (898x508) — wide landscape bracket, show full width -->
+    <div class="img-block">
+      <div class="img-full">
+        <img src="images/AcademicProjects_image9.jpg" alt="Predicted 2022 World Cup bracket" />
+        <p class="img-caption">Predicted Bracket of the 2022 World Cup. We got it wrong but Netherlands got close!</p>
       </div>
     </div>
   </div>

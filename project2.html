@@ -43,17 +43,24 @@
     .step p { font-size: 15px; font-weight: 300; color: var(--ink-muted); line-height: 1.7; }
     .outcome-box { background: var(--bg-card); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: 6px; padding: 20px 24px; }
     .outcome-box p { font-size: 15px; font-weight: 300; color: var(--ink-muted); line-height: 1.7; }
-    .image-row { display: grid; gap: 16px; margin-top: 24px; }
-    .image-row.two { grid-template-columns: 1fr 1fr; }
-    .image-row.one { grid-template-columns: 1fr; max-width: 520px; }
-    .image-item img { width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--rule); display: block; }
-    .image-caption { font-size: 12px; color: var(--ink-faint); margin-top: 8px; line-height: 1.5; font-style: italic; }
+
+    .img-block { margin-top: 28px; }
+    /* Single centered image */
+    .img-single { display: flex; justify-content: center; }
+    .img-single img { width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--rule); display: block; }
+    /* Pair: fixed shared height so mismatched orientations look even */
+    .img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .img-pair img { width: 100%; height: 320px; object-fit: cover; object-position: center; border-radius: 6px; border: 1px solid var(--rule); display: block; }
+    /* Full width landscape */
+    .img-full img { width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--rule); display: block; }
+    .img-caption { font-size: 12px; color: var(--ink-faint); margin-top: 8px; line-height: 1.5; font-style: italic; text-align: center; }
+
     footer { border-top: 1px solid var(--rule); padding: 32px; max-width: var(--max); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
     footer p { font-size: 13px; color: var(--ink-faint); }
     .footer-links { display: flex; gap: 20px; }
     .footer-links a { font-size: 13px; color: var(--ink-faint); text-decoration: none; transition: color .2s; }
     .footer-links a:hover { color: var(--ink-muted); }
-    @media (max-width: 640px) { .page { padding: 90px 20px 60px; } .nav-inner { padding: 0 20px; } .image-row.two { grid-template-columns: 1fr; } footer { flex-direction: column; gap: 12px; text-align: center; } }
+    @media (max-width: 640px) { .page { padding: 90px 20px 60px; } .nav-inner { padding: 0 20px; } .img-pair { grid-template-columns: 1fr; } .img-pair img { height: auto; } footer { flex-direction: column; gap: 12px; text-align: center; } }
   </style>
 </head>
 <body>
@@ -76,107 +83,99 @@
     <span class="tag">Prototyping</span>
   </div>
 
-  <!-- Sub-project 1: Transducer Mount -->
+  <!-- Transducer Mount -->
   <div class="subproject">
     <h2 class="subproject-title">Ultrasonic Transducer Mount</h2>
     <p class="subproject-type">SolidWorks &amp; Rapid Prototyping</p>
-
     <div class="section">
       <p class="section-label">Problem</p>
-      <p>AcousticaBio purchased a new transducer and the dimensions and weight were larger than the previous transducer. Because of this, we needed to remake the mount to accommodate the changes.</p>
+      <p>AcousticaBio purchased a new transducer with larger dimensions and greater weight than the previous model. The existing mount could not accommodate these changes and needed to be redesigned.</p>
     </div>
-
     <div class="section">
       <p class="section-label">Action</p>
-      <p style="font-size:15px;font-weight:300;color:var(--ink-muted);line-height:1.7;">First I drafted a design in SolidWorks. Then I adjusted that design to accommodate space constraints, ease of set up, and the weight of the transducer. I then 3D printed an initial version before identifying necessary changes and making adjustments in a subsequent iteration. Finally, I reprinted the piece and implemented it on the printer.</p>
+      <p style="font-size:15px;font-weight:300;color:var(--ink-muted);line-height:1.7;">First I drafted a design in SolidWorks, then adjusted it to accommodate space constraints, ease of setup, and the weight of the transducer. I 3D printed an initial version, identified necessary changes, made adjustments in a subsequent iteration, and finally reprinted and implemented the piece on the printer.</p>
     </div>
-
     <div class="section">
       <p class="section-label">Outcome</p>
       <div class="outcome-box">
-        <p>A sturdy 3D printed mount that supports the transducer, prevents deformation over time, and allows for easy set up.</p>
+        <p>A sturdy 3D printed mount that supports the transducer, prevents deformation over time, and allows for easy setup.</p>
       </div>
     </div>
-
-    <!-- Images appear right after outcome, side by side, matching Wix layout -->
-    <div class="image-row two">
-      <div class="image-item">
-        <img src="images/acousticaBio_designs_image1.jpg" alt="SolidWorks rendering of transducer mount" />
-        <p class="image-caption">A SolidWorks rendering of the transducer mount.</p>
-      </div>
-      <div class="image-item">
-        <img src="images/acousticaBio_designs_image2.jpg" alt="Transducer on printer in the mount" />
-        <p class="image-caption">An image of the transducer on the printer in the mount.</p>
+    <!-- img1 is landscape (556x530), img2 is portrait (362x660) — mismatched, so use fixed height -->
+    <div class="img-block">
+      <div class="img-pair">
+        <div>
+          <img src="images/acousticaBio_designs_image1.jpg" alt="SolidWorks rendering of transducer mount" />
+          <p class="img-caption">A SolidWorks rendering of the transducer mount.</p>
+        </div>
+        <div>
+          <img src="images/acousticaBio_designs_image2.jpg" alt="Transducer on printer in the mount" />
+          <p class="img-caption">An image of the transducer on the printer in the mount.</p>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Sub-project 2: Printhead -->
+  <!-- Printhead -->
   <div class="subproject">
     <h2 class="subproject-title">Acoustophoretic Printhead</h2>
     <p class="subproject-type">Mechanical Design &amp; SolidWorks</p>
-
     <div class="section">
       <p class="section-label">Problem</p>
-      <p>The new transducer emitted sound waves at a different frequency than the previous one. Because of this, the parameters of the printhead that channeled the acoustic field had to be adjusted.</p>
+      <p>The new transducer emitted sound waves at a different frequency than the previous one, requiring adjustments to the printhead parameters that channel the acoustic field.</p>
     </div>
-
     <div class="section">
       <p class="section-label">Action</p>
       <ul class="steps">
-        <li class="step"><span class="step-bullet">–</span><p>On the previous version of the printer the back reflector was adjusted manually. In a system where precision was imperative this didn't seem logical, so I designed, built, and implemented a back reflector bridge that held a motor and could be moved from the desktop control system. The bridge also acted as a brace for the acoustic chamber.</p></li>
-        <li class="step"><span class="step-bullet">–</span><p>The acoustic chamber itself was adjusted to accommodate the new transducer. The new transducer required a wider and longer channel in the center. I calculated these dimensions using equations found in a paper that depended on the wavelength and in turn the frequency of the transducer.</p></li>
-        <li class="step"><span class="step-bullet">–</span><p>I designed, printed, and implemented printhead snaps so they could easily snap fit into the chamber depending on the transducer being used — saving a significant amount of time during testing.</p></li>
+        <li class="step"><span class="step-bullet">–</span><p>Designed, built, and implemented a back reflector bridge holding a motor that could be controlled from the desktop system, replacing the previous manual adjustment. The bridge also acted as a structural brace for the acoustic chamber.</p></li>
+        <li class="step"><span class="step-bullet">–</span><p>Adjusted the acoustic chamber geometry for the new transducer, calculating dimensions using equations from a published paper based on wavelength and frequency.</p></li>
+        <li class="step"><span class="step-bullet">–</span><p>Designed, printed, and implemented snap-fit printhead components so transducers could be swapped without disassembling the entire printhead — saving significant time during testing.</p></li>
       </ul>
     </div>
-
     <div class="section">
       <p class="section-label">Outcome</p>
       <div class="outcome-box">
-        <p>The new printhead design was able to produce an acoustophoretic force of about 250g — 25% higher than the previous version. It was also easier for the user to operate because of the automation of the back reflector.</p>
+        <p>The new printhead design produced an acoustophoretic force of approximately 250g — a 25% improvement over the previous version. The automated back reflector also made the printer significantly easier to operate.</p>
       </div>
     </div>
-
-    <!-- Printhead image appears after outcome -->
-    <div class="image-row one">
-      <div class="image-item">
+    <!-- img3 is landscape (839x590) — show full width, natural height -->
+    <div class="img-block">
+      <div class="img-full">
         <img src="images/acousticaBio_designs_image3.jpg" alt="Acoustophoretic printhead design" />
-        <p class="image-caption">Updated acoustophoretic printhead design.</p>
+        <p class="img-caption">Updated acoustophoretic printhead design.</p>
       </div>
     </div>
   </div>
 
-  <!-- Sub-project 3: Acrylic Panels -->
+  <!-- Acrylic Panels -->
   <div class="subproject">
     <h2 class="subproject-title">Laser Cut Acrylic Electronics Panels</h2>
     <p class="subproject-type">Laser Cutting &amp; Design</p>
-
     <div class="section">
       <p class="section-label">Problem</p>
-      <p>In the second iteration of our printer the electronics changed, so we needed a new design of acrylic panels for the electronics cart.</p>
+      <p>The second iteration of the printer required a new electronics configuration. The existing acrylic panel design no longer fit the updated components.</p>
     </div>
-
     <div class="section">
       <p class="section-label">Action</p>
-      <p style="font-size:15px;font-weight:300;color:var(--ink-muted);line-height:1.7;">Designed acrylic panels to be laser cut and fit all of the necessary pieces.</p>
+      <p style="font-size:15px;font-weight:300;color:var(--ink-muted);line-height:1.7;">Designed acrylic panels to be laser cut and fit all of the necessary components.</p>
     </div>
-
     <div class="section">
       <p class="section-label">Outcome</p>
       <div class="outcome-box">
-        <p>3 functional shelves of electronics nicely spaced and put together on the electronics and hardware cart to keep components labeled and organized.</p>
+        <p>Three functional shelves of electronics, neatly spaced and organized on the electronics and hardware cart, keeping all components labeled and easy to identify.</p>
       </div>
     </div>
-
-    <!-- Two acrylic panel images after outcome -->
-    <div class="image-row two">
-      <div class="image-item">
-        <img src="images/acousticaBio_designs_image4.jpg" alt="Laser cut acrylic with electronics before cart" />
-        <p class="image-caption">Image of the laser cut acrylic with some of the electronics on before being implemented on the cart.</p>
-      </div>
-      <div class="image-item">
-        <img src="images/acousticaBio_designs_image5.jpg" alt="Laser cut acrylic front panels with labels" />
-        <p class="image-caption">An image of the laser cut acrylic front panels with labels and some of the electronics on before being placed on cart.</p>
+    <!-- img4 is portrait (602x802), img5 is landscape (1010x758) — mismatched, use fixed height -->
+    <div class="img-block">
+      <div class="img-pair">
+        <div>
+          <img src="images/acousticaBio_designs_image4.jpg" alt="Laser cut acrylic with electronics before cart" />
+          <p class="img-caption">Laser cut acrylic with some electronics before being implemented on the cart.</p>
+        </div>
+        <div>
+          <img src="images/acousticaBio_designs_image5.jpg" alt="Laser cut acrylic front panels with labels" />
+          <p class="img-caption">Laser cut acrylic front panels with labels before being placed on cart.</p>
+        </div>
       </div>
     </div>
   </div>
